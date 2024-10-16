@@ -27,19 +27,19 @@ body {
 }
 
 .score-board {
-  position: fixed;
-  top: 80px;
-  left: 20px;
+  margin-top: 4rem; /* Ajustar el margen superior */
   color: white;
   font-size: 1.5em;
+  align-self: flex-start; /* Alinear a la izquierda */
+  margin-left: 20px; /* Margen izquierdo para separación */
 }
 
 .image-container {
-  margin-top: 150px;
+  margin-top: 3rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 10px; /* Espacio entre tarjetas */
 }
 
 .flip-card {
@@ -61,7 +61,8 @@ body {
   transform: rotateY(180deg);
 }
 
-.flip-card-front, .flip-card-back {
+.flip-card-front,
+.flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -86,4 +87,27 @@ body {
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .score-board {
+    font-size: 1.2em; /* Ajustar tamaño de fuente */
+    margin-top: 2rem; /* Ajustar margen superior */
+    margin-left: 10px; /* Margen izquierdo para separación */
+  }
+
+  .image-container {
+    margin-top: 2rem; /* Ajustar el margen superior */
+  }
+}
+
+@media (max-width: 480px) {
+  .score-board {
+    font-size: 1em; /* Ajustar tamaño de fuente para pantallas pequeñas */
+  }
+
+  .image-container {
+    margin-top: 1rem; /* Ajustar el margen superior */
+  }
 }

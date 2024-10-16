@@ -28,12 +28,10 @@ function App() {
     const [scorePlayer2, setScorePlayer2] = useState(0);
     const [disabled, setDisabled] = useState(false); 
 
-
     function shuffleCards(cards) {
         return [...cards].sort(() => Math.random() - 0.5);
     }
 
-    // Maneja el clic en una carta
     const handleCardClick = (index) => {
         if (disabled || cards[index].matched || index === firstCard) return;
 
@@ -44,7 +42,6 @@ function App() {
         }
     };
 
-    
     useEffect(() => {
         if (firstCard !== null && secondCard !== null) {
             setDisabled(true); 
@@ -55,7 +52,6 @@ function App() {
         }
     }, [firstCard, secondCard]);
 
-    
     const checkMatch = () => {
         const updatedCards = [...cards];
 
@@ -63,32 +59,34 @@ function App() {
             updatedCards[firstCard].matched = true;
             updatedCards[secondCard].matched = true;
 
-            
+            // Si el jugador hace un par correcto, suma puntos pero no cambia el turno
             if (turnPlayer1) {
                 setScorePlayer1(prev => prev + 1);
             } else {
                 setScorePlayer2(prev => prev + 1);
             }
+        } else {
+            // Si se equivocan, cambia el turno
+            setTurnPlayer1(prev => !prev); 
         }
 
-        
         setCards(updatedCards);
         resetTurn();
     };
 
-   
     const resetTurn = () => {
         setFirstCard(null);
         setSecondCard(null);
         setDisabled(false);
-        setTurnPlayer1(prev => !prev); 
     };
 
     const winnerMessage = () => {
-        if (scorePlayer1 > scorePlayer2) return "¡Jugador 1 gana!";
-        if (scorePlayer2 > scorePlayer1) return "¡Jugador 2 gana!";
+        if (scorePlayer1 > scorePlayer2) return "¡Jugador 1 gana! :)";
+        if (scorePlayer2 > scorePlayer1) return "¡Jugador 2 gana! :)";
         return "¡Empate!";
     };
+
+    const currentPlayer = turnPlayer1 ? "Jugador 1" : "Jugador 2";
 
     return (
         <div className="container text-center">
@@ -96,6 +94,7 @@ function App() {
             <div className="score-board">
                 <p>Jugador 1: {scorePlayer1}</p>
                 <p>Jugador 2: {scorePlayer2}</p>
+                <p>Turno actual: {currentPlayer}</p>
             </div>
 
             <div className="image-container">
